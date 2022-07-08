@@ -100,6 +100,7 @@ def supportsInterface(interface_id: bytes4) -> bool:
     return interface_id in SUPPORTED_INTERFACES
 
 
+@view
 @external
 def getApproved(_tokenId: uint256) -> address:
     """
@@ -365,15 +366,6 @@ def updateOwner(_owner: address):
 
 
 @external
-def updateMinPrice(_minPrice: uint256):
-    """
-    @dev Function to update the owner of the contract
-    """
-    assert msg.sender == self.owner
-    self.minPrice = _minPrice
-
-
-@external
 def acceptOwnership():
     """
     @dev Function to accept the ownership of the contract
@@ -381,6 +373,15 @@ def acceptOwnership():
     assert msg.sender == self.pendingOwner
     self.owner = self.pendingOwner
     self.pendingOwner = ZERO_ADDRESS
+
+
+@external
+def updateMinPrice(_minPrice: uint256):
+    """
+    @dev Function to update the minimum price to mint a token
+    """
+    assert msg.sender == self.owner
+    self.minPrice = _minPrice
 
 
 @external
@@ -400,9 +401,13 @@ def setAddress(_bookName: String[16], _addressName: String[16], _address: addres
     
     log AddressSetup(self.ownerOf[tokenId], tokenId, _bookName, _addressName, block.timestamp)
 
+
 @view
 @external
 def validateContract(_bookName: String[16], _addressName: String[16]) -> bool:
+    """
+    @dev Function to verify if a contract implements the AddressValidator interface
+    """
     _address: address = self.dAddressOf[_bookName][_addressName]
 
     assert _address.is_contract, "Not a contract"
@@ -411,4 +416,11 @@ def validateContract(_bookName: String[16], _addressName: String[16]) -> bool:
     return True
 
 
+@nonpayable
+@external
+def withdraw():
+    """
+    @dev Function to withdraw the contract balance to the contract owner
+    """
+    send(self.owner, self.balance)
     
