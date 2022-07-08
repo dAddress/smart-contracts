@@ -1,4 +1,4 @@
-# daddress Smart Contracts
+# dAddress Smart Contracts
 
 # 1 - Setting up the environment:
 
