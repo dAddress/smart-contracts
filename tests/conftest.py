@@ -33,6 +33,10 @@ def dAddress(DAddress, owner):
         0,
         {"from": owner},
     )
+    assert dAddress.name() == "dAddress Book"
+    assert dAddress.symbol() == "dAB"
+    assert dAddress.tokenUri() == "https://token.daddress.org/{id}"
+    assert dAddress.minPrice() == 0
 
     yield dAddress
 

@@ -6,3 +6,5 @@ build/
 reports/
 manifest.json
 .pytest_cache
+
+manifests/1337.json
