@@ -1,0 +1,8 @@
+{
+  "python.formatting.provider": "black",
+  "editor.defaultFormatter": "ms-python.python",
+  "python.testing.pytestEnabled": true,
+  "python.defaultInterpreterPath": "~/.pyenv/versions/3.9.8/envs/daddress/bin/python",
+  "vyper.command": "~/.pyenv/versions/3.9.8/envs/daddress/bin/vyper",
+  "python.terminal.activateEnvironment": false
+}
