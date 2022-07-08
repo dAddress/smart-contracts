@@ -72,10 +72,10 @@ SUPPORTED_INTERFACES: constant(bytes4[2]) = [
     0x80ac58cd,
 ]
 
-pendingOwner: address
-owner: address
+pendingOwner: public(address)
+owner: public(address)
 
-minPrice: uint256
+minPrice: public(uint256)
 
 bookId: public(HashMap[String[16], uint256])
 bookName: public(HashMap[uint256, String[16]])

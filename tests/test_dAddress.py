@@ -166,3 +166,15 @@ def test_transfer_approval(dAddress, owner, bob, alice):
 
     dAddress.transferFrom(bob, alice, 1, {"from": owner})
     assert dAddress.balanceOf(alice) == 1
+
+
+def test_ownership_change(dAddress, owner, bob):
+    assert dAddress.owner() == owner
+
+    dAddress.updateOwner(bob, {"from": owner})
+    assert dAddress.pendingOwner() == bob
+    assert dAddress.owner() == owner
+
+    dAddress.acceptOwnership({"from": bob})
+    assert dAddress.owner() == bob
+    assert dAddress.pendingOwner() == ZERO_ADDRESS
