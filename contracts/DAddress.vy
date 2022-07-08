@@ -406,7 +406,7 @@ def validateContract(_bookName: String[16], _addressName: String[16]) -> bool:
     _address: address = self.dAddressOf[_bookName][_addressName]
 
     assert _address.is_contract, "Not a contract"
-    assert AddressValidator(_address).isValidContract(_bookName, _addressName) == True, "Not Valid"
+    assert AddressValidator(_address).isValidContract(_bookName, _addressName) == True, "Not valid"
 
     return True
 
