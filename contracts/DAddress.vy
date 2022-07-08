@@ -38,13 +38,15 @@ event ApprovalForAll:
 
 event BookCreation:
     owner: indexed(address)
-    bookName: indexed(String[16])
+    tokenId: indexed(uint256)
+    bookName: String[16]
     _timestamp: uint256
 
 event AddressSetup:
     owner: indexed(address)
-    bookName: indexed(String[16])
-    addressName: indexed(String[16])
+    tokenId: indexed(uint256)
+    bookName: String[16]
+    addressName: String[16]
     _timestamp: uint256
 
 
@@ -339,7 +341,7 @@ def mint(_to: address, _bookName: String[16]) -> uint256:
     self.balanceOf[_to] += 1
 
     log Transfer(ZERO_ADDRESS, _to, tokenId)
-    log BookCreation(_to, _bookName, block.timestamp)
+    log BookCreation(_to, tokenId, _bookName, block.timestamp)
     
     return tokenId
 
@@ -396,7 +398,7 @@ def setAddress(_bookName: String[16], _addressName: String[16], _address: addres
 
     self.dAddressOf[_bookName][_addressName] = _address
     
-    log AddressSetup(self.ownerOf[tokenId], _bookName, _addressName, block.timestamp)
+    log AddressSetup(self.ownerOf[tokenId], tokenId, _bookName, _addressName, block.timestamp)
 
 @view
 @external
